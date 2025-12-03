@@ -1,0 +1,417 @@
+/* 🎨 Register Page - Premium Glassmorphism 2025 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Floating Particles */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+      4px 4px at 20% 30%,
+      rgba(255, 255, 255, 0.8),
+      transparent
+    ),
+    radial-gradient(3px 3px at 80% 70%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(2px 2px at 40% 90%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(2px 2px at 90% 20%, rgba(255, 255, 255, 0.3), transparent);
+  background-repeat: repeat;
+  background-size: 300px 200px;
+  animation: particleFloat 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(120deg);
+    opacity: 0;
+  }
+}
+
+/* Register Container */
+.register-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 5px; */
+
+  /* max-height: 50px; */
+  /* min-height: 10vh; */
+  padding: 2rem;
+}
+
+/* Register Card */
+.register-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(35px);
+  border-radius: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.3);
+  width: 100%;
+  /* max-height:5%; */
+  max-width: 480px;
+  padding: 4rem 3.5rem;
+  position: relative;
+  animation: cardFloat 6s ease-in-out infinite;
+  overflow: hidden;
+}
+
+@keyframes cardFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.register-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    #ee7752,
+    #e73c7e,
+    #23a6d5,
+    #23d5ab,
+    #ee7752
+  );
+  background-size: 400% 400%;
+  animation: borderGlow 3s linear infinite;
+}
+
+@keyframes borderGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 400% 50%;
+  }
+}
+
+/* Logo Section */
+.logo-section {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.logo-section i {
+  font-size: 5rem;
+  background: linear-gradient(135deg, #ee7752, #e73c7e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1.5rem;
+  display: block;
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.logo-section h1 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #1f2937, #374151);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+}
+
+.logo-section p {
+  color: #6b7280;
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+
+/* Register Form */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Input Groups */
+.input-group {
+  position: relative;
+}
+
+.input-group i {
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  font-size: 1.3rem;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 1.75rem 1.75rem 1.75rem 4.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #1f2937;
+}
+
+.input-group input::placeholder {
+  color: #9ca3af;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: rgba(238, 119, 82, 0.5);
+  box-shadow: 0 0 0 4px rgba(238, 119, 82, 0.1), 0 20px 40px rgba(0, 0, 0, 0.1);
+  background: white;
+  transform: translateY(-3px);
+}
+
+.input-group input:focus + i,
+.input-group input:not(:placeholder-shown) + i {
+  color: #ee7752;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Register Button */
+.btn-primary {
+  background: linear-gradient(135deg, #ee7752, #e73c7e);
+  color: white;
+  border: none;
+  padding: 1.75rem 3rem;
+  border-radius: 28px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 20px 40px rgba(238, 119, 82, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.6s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(238, 119, 82, 0.5);
+}
+
+.btn-primary:active {
+  transform: translateY(-3px);
+}
+
+/* Divider */
+.divider {
+  position: relative;
+  text-align: center;
+  margin: 3rem 0;
+  color: #9ca3af;
+}
+
+.divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 0, 0, 0.1),
+    transparent
+  );
+}
+
+.divider span {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0 2rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Login Link */
+.login-link {
+  text-align: center;
+  color: #6b7280;
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+.login-link a {
+  color: #ee7752;
+  font-weight: 700;
+  text-decoration: none;
+  position: relative;
+}
+
+.login-link a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(135deg, #ee7752, #e73c7e);
+  transition: width 0.3s ease;
+}
+
+.login-link a:hover::after {
+  width: 100%;
+}
+
+/* Status Message */
+.status-message {
+  margin-top: 2rem;
+  padding: 1.5rem 2rem;
+  border-radius: 20px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+}
+
+.status-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.status-success {
+  background: rgba(34, 197, 94, 0.2);
+  color: #166534;
+  border: 2px solid rgba(34, 197, 94, 0.3);
+  backdrop-filter: blur(15px);
+}
+
+.status-error {
+  background: rgba(239, 68, 68, 0.2);
+  color: #dc2626;
+  border: 2px solid rgba(239, 68, 68, 0.3);
+  backdrop-filter: blur(15px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .register-container {
+    padding: 1rem;
+  }
+
+  .register-card {
+    padding: 3rem 2.5rem;
+    margin: 1rem;
+    border-radius: 28px;
+  }
+
+  .logo-section h1 {
+    font-size: 2.3rem;
+  }
+
+  .logo-section i {
+    font-size: 4rem;
+  }
+
+  .btn-primary {
+    padding: 1.5rem 2.5rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-card {
+    padding: 2.5rem 2rem;
+  }
+
+  .input-group input {
+    padding: 1.5rem 1.25rem 1.5rem 4rem;
+    font-size: 1rem;
+  }
+}
+
+/* Loading State */
+.btn-primary:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-primary:disabled i {
+  animation: spin 1s linear infinite;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register — AI Resume Analyzer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-card">
+            <div class="logo-section">
+                <i class="fas fa-user-plus"></i>
+                <h1>Create Account</h1>
+                <p>Join thousands of professionals using AI-powered resume analysis</p>
+            </div>
+            
+            <form class="register-form" id="registerForm">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input id="name" type="text" placeholder="Full Name" required>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input id="email" type="email" placeholder="Email Address" required>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input id="password" type="password" placeholder="Password" required>
+                </div>
+                
+                <button type="submit" id="btnRegister" class="btn-primary">
+                    <i class="fas fa-user-plus"></i>
+                    Create Account
+                </button>
+            </form>
+            
+            <div class="divider">
+                <span>or</span>
+            </div>
+            
+            <p class="login-link">
+                Already have an account? 
+                <a href="/login/">Login Here</a>
+            </p>
+            
+            <div id="authStatus" class="status-message"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

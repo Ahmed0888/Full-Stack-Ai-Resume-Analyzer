@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Resumes - AI Resume Analyzer</title>
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-content">
+            <div class="nav-left">
+                <i class="fas fa-file-alt"></i>
+                <h1>My Resumes</h1>
+            </div>
+            <button id="logoutBtn" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Stats Cards -->
+        <section class="stats-grid" id="statsGrid">
+            <!-- Dynamic stats -->
+        </section>
+
+        <!-- Resumes Section -->
+        <section class="resumes-section">
+            <div class="section-header">
+                <h2>
+                    <i class="fas fa-list"></i>
+                    All Resumes
+                </h2>
+                <a href="/analyzer" class="btn-primary">
+                    <i class="fas fa-plus"></i> New Analysis
+                </a>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+            </div>
+
+            <div class="resumes-grid" id="resumesList"></div>
+            
+            <div class="no-resumes" id="noResumes">
+                <i class="fas fa-file-alt"></i>
+                <h3>No resumes analyzed yet</h3>
+                <p>Upload your first resume to get AI-powered analysis</p>
+                <a href="/upload.html" class="btn-primary">Analyze Resume Now</a>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="../css/universal.css"> -->
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-left">
+                <i class="fas fa-brain"></i>
+                <span>AI Resume Analyzer</span>
+            </div>
+            <div class="nav-right">
+                <a href="/resumes/" class="nav-link">My Resumes</a>
+                <a href="/jobs/" class="nav-link">Jobs</a>
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="analyzer-container">
+        <div class="upload-card">
+            <div class="upload-header">
+                <i class="fas fa-file-alt"></i>
+                <h1>Upload & Analyze Resume</h1>
+                <p>Get instant AI-powered feedback on your resume</p>
+            </div>
+
+            <div class="upload-form">
+                <div class="file-upload">
+                    <label>
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>Upload Resume (PDF)</span>
+                        <input type="file" id="fileInput" accept=".pdf" />
+                    </label>
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-briefcase"></i>
+                    <textarea id="jobDesc" placeholder="Optional: Paste job description for better matching analysis"></textarea>
+                </div>
+
+                <button id="btnUpload" class="btn-primary-large">
+                    <i class="fas fa-rocket"></i>
+                    Analyze Resume
+                </button>
+
+                <div id="loading" class="loading-state">
+                    <div class="spinner"></div>
+                    <span>AI is analyzing your resume...</span>
+                </div>
+            </div>
+
+            <div id="result" class="results-section"></div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <!-- <script src="../js/analyzer.js"></script> -->
+</body>
+</html>
