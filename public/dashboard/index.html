@@ -5,79 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - AI Resume Analyzer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/universal.css">
     <link rel="stylesheet" href="style.css">
-    <!-- <link rel="stylesheet" href="../css/universal.css"> -->
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-content">
             <div class="nav-left">
                 <i class="fas fa-chart-line"></i>
-                <span>Dashboard</span>
+                <h1>Dashboard</h1>
             </div>
             <div class="nav-right">
-                <a href="/resumes/" class="nav-link"><i class="fas fa-file-alt"></i> Resumes</a>
-                <a href="/jobs/" class="nav-link"><i class="fas fa-briefcase"></i> Jobs</a>
-                <a href="/analyzer/" class="nav-link"><i class="fas fa-rocket"></i> Analyze</a>
+                <a href="/dashboard/" class="nav-link active"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="/resumes/" class="nav-link"><i class="fas fa-file-alt"></i> All Resumes</a>
+                <a href="/jobs/" class="nav-link"><i class="fas fa-briefcase"></i> Track your Job</a>
+                <a href="/analyzer/" class="nav-link"><i class="fas fa-robot"></i> Analyze Resume with Ai </a>
                 <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
             </div>
         </div>
     </nav>
 
-    <main class="dashboard-container">
-        <div class="stats-grid">
-            <div class="glass-card stat-card blue">
-                <i class="fas fa-file-alt"></i>
-                <div>
-                    <h3 id="totalResumes">12</h3>
+    <main class="container">
+        <section class="stats-grid">
+            <div class="stat-card stat-blue">
+                <div class="stat-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="stat-content">
                     <p>Total Resumes</p>
+                    <div class="stat-number" id="totalResumes">12</div>
                 </div>
             </div>
-            <div class="glass-card stat-card green">
-                <i class="fas fa-star"></i>
-                <div>
-                    <h3 id="avgScore">78</h3>
+            <div class="stat-card stat-green">
+                <div class="stat-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-content">
                     <p>Avg Score</p>
+                    <div class="stat-number" id="avgScore">78</div>
                 </div>
             </div>
-            <div class="glass-card stat-card purple">
-                <i class="fas fa-briefcase"></i>
-                <div>
-                    <h3 id="totalJobs">5</h3>
+            <div class="stat-card stat-purple">
+                <div class="stat-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="stat-content">
                     <p>Job Applications</p>
+                    <div class="stat-number" id="totalJobs">5</div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="quick-actions">
-            <div class="glass-card">
-                <h2>Quick Actions</h2>
-                <div class="action-buttons">
-                    <a href="/analyzer/" class="btn-action primary">
-                        <i class="fas fa-rocket"></i>
-                        Analyze New Resume
-                    </a>
-                    <a href="/jobs/" class="btn-action secondary">
-                        <i class="fas fa-plus"></i>
-                        Track New Job
-                    </a>
-                    <a href="/resumes/" class="btn-action success">
-                        <i class="fas fa-list"></i>
-                        View My Resumes
-                    </a>
-                </div>
+        <section class="quick-actions">
+            <div class="section-header">
+                <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
             </div>
-        </div>
+            <div class="action-buttons">
+                <a href="/analyzer/" class="btn-primary">
+                    <i class="fas fa-rocket"></i> Analyze New Resume
+                </a>
+                <a href="/jobs/" class="btn-primary">
+                    <i class="fas fa-plus"></i> Track New Job
+                </a>
+                <a href="/resumes/" class="btn-primary">
+                    <i class="fas fa-list"></i> View My Resumes
+                </a>
+            </div>
+        </section>
 
-        <div class="recent-activity">
-            <div class="glass-card">
-                <h2>Recent Activity</h2>
-                <div class="activity-list">
-                    <!-- Dynamic content -->
-                </div>
+        <section class="recent-activity">
+            <div class="section-header">
+                <h2><i class="fas fa-history"></i> Recent Activity</h2>
             </div>
-        </div>
+            <div class="activity-list" id="activityList">
+                <!-- Dynamic content -->
+            </div>
+        </section>
     </main>
 
     <script src="script.js"></script>

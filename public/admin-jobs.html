@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Job Insert - Quick Add</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+        }
+        input::placeholder, textarea::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(139,92,246,0.3);
+        }
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            width: 100%;
+            justify-content: center;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(16,185,129,0.4);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            margin-right: 1rem;
+        }
+        .jobs-list {
+            margin-top: 2rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .job-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #10b981;
+        }
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .status-applied { background: #fed7aa; color: #b45309; }
+        .status-interviewing { background: #bbf7d0; color: #059669; }
+        .status-rejected { background: #fecaca; color: #991b1b; }
+        .status-offered { background: #dcfce7; color: #166534; }
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .error { color: #ef4444; background: rgba(239,68,68,0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+        .success { color: #10b981; background: rgba(16,185,129,0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-briefcase"></i> Quick Job Insert</h1>
+        
+        <!-- Status Messages -->
+        <div id="message"></div>
+        
+        <!-- Job Form -->
+        <form id="jobForm">
+            <div class="form-group">
+                <label>User ID (Database ObjectId)</label>
+                <input type="text" id="userId" placeholder="64f1234567890abcdef123456" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Company *</label>
+                <input type="text" id="company" placeholder="Google, Microsoft, etc." required>
+            </div>
+            
+            <div class="form-group">
+                <label>Position *</label>
+                <input type="text" id="position" placeholder="Frontend Developer" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Applied Date *</label>
+                <input type="date" id="appliedDate" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Status *</label>
+                <select id="status" required>
+                    <option value="">Select Status</option>
+                    <option value="Applied">Applied</option>
+                    <option value="Interviewing">Interviewing</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Offered">Offered</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Job Description (Optional)</label>
+                <textarea id="jobDescription" rows="3" placeholder="Paste job description here..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Notes (Optional)</label>
+                <textarea id="notes" rows="3" placeholder="Interview dates, contacts, etc..."></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+                Add Job Now
+            </button>
+        </form>
+        
+        <!-- Jobs List -->
+        <div id="jobsList" class="jobs-list" style="display:none;">
+            <h3 style="color:white;margin-bottom:1rem;"><i class="fas fa-list"></i> Recently Added Jobs:</h3>
+            <div id="jobsContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        // Set today's date by default
+        document.getElementById('appliedDate').valueAsDate = new Date();
+
+        document.getElementById('jobForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const btn = document.querySelector('.btn-primary');
+            const messageDiv = document.getElementById('message');
+            const jobsList = document.getElementById('jobsList');
+            
+            // Show loading
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding...';
+            btn.disabled = true;
+            messageDiv.innerHTML = '<div class="loading"><div class="spinner"></div>Adding job...</div>';
+            
+            const formData = {
+                userId: document.getElementById('userId').value.trim(),
+                company: document.getElementById('company').value.trim(),
+                position: document.getElementById('position').value.trim(),
+                appliedDate: document.getElementById('appliedDate').value,
+                status: document.getElementById('status').value,
+                jobDescription: document.getElementById('jobDescription').value.trim(),
+                notes: document.getElementById('notes').value.trim()
+            };
+            
+            try {
+                // Direct API call - NO TOKEN REQUIRED (for admin)
+                const response = await fetch('/api/jobs', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    messageDiv.innerHTML = `
+                        <div class="success">
+                            ✅ <strong>${data.job.company}</strong> job added successfully! 
+                            ID: de>${data.job._id}</code>
+                        </div>
+                    `;
+                    document.getElementById('jobForm').reset();
+                    document.getElementById('appliedDate').valueAsDate = new Date();
+                    jobsList.style.display = 'block';
+                    loadRecentJobs(); // Load recent jobs
+                } else {
+                    throw new Error(data.message || 'Unknown error');
+                }
+            } catch (error) {
+                messageDiv.innerHTML = `
+                    <div class="error">
+                        ❌ Error: ${error.message}
+                        <br><small>Check backend server & routes</small>
+                    </div>
+                `;
+            } finally {
+                btn.innerHTML = '<i class="fas fa-plus"></i> Add Job Now';
+                btn.disabled = false;
+            }
+        });
+
+        async function loadRecentJobs() {
+            try {
+                const response = await fetch('/api/jobs');
+                const data = await response.json();
+                const container = document.getElementById('jobsContainer');
+                
+                if (data.success && data.jobs.length > 0) {
+                    container.innerHTML = data.jobs.slice(0, 5).map(job => `
+                        <div class="job-item">
+                            <div style="display:flex;justify-content:space-between;align-items:center;">
+                                <strong>${job.company}</strong>
+                                <span class="status-badge status-${job.status.toLowerCase()}">${job.status}</span>
+                            </div>
+                            <div>${job.position}</div>
+                            <div style="font-size:0.9rem;color:rgba(255,255,255,0.7);">
+                                ${new Date(job.appliedDate).toLocaleDateString()} | 
+                                ${job.userId.slice(-6)}
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.log('Recent jobs load failed:', error);
+            }
+        }
+    </script>
+</body>
+</html>

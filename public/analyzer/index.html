@@ -6,26 +6,27 @@
     <title>AI Resume Analyzer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <!-- <link rel="stylesheet" href="../css/universal.css"> -->
 </head>
 <body>
+    <!-- Navbar - SAME AS ALL OTHER PAGES -->
     <nav class="navbar">
         <div class="nav-content">
             <div class="nav-left">
-                <i class="fas fa-brain"></i>
-                <span>AI Resume Analyzer</span>
+                <i class="fas fa-robot"></i>
+                <h1>AI Analyzer</h1>
             </div>
             <div class="nav-right">
-                <a href="/resumes/" class="nav-link">My Resumes</a>
-                <a href="/jobs/" class="nav-link">Jobs</a>
-                <button class="btn-logout" onclick="logout()">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
+                <a href="/dashboard/" class="nav-link"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="/resumes/" class="nav-link"><i class="fas fa-file-alt"></i>  All Resumes</a>
+                <a href="/jobs/" class="nav-link"><i class="fas fa-briefcase"></i> Track your Jobs</a>
+                <a href="/analyzer/" class="nav-link active"><i class="fas fa-robot"></i> Analyze Resume with Ai</a>
+                <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
             </div>
         </div>
     </nav>
 
-    <main class="analyzer-container">
+    <main class="container">
+        <!-- Main Upload Card -->
         <div class="upload-card">
             <div class="upload-header">
                 <i class="fas fa-file-alt"></i>
@@ -34,35 +35,44 @@
             </div>
 
             <div class="upload-form">
-                <div class="file-upload">
-                    <label>
+                <!-- File Upload -->
+                <div class="form-group file-upload">
+                    <label for="fileInput">
                         <i class="fas fa-cloud-upload-alt"></i>
                         <span>Upload Resume (PDF)</span>
                         <input type="file" id="fileInput" accept=".pdf" />
                     </label>
                 </div>
 
-                <div class="input-group">
-                    <i class="fas fa-briefcase"></i>
-                    <textarea id="jobDesc" placeholder="Optional: Paste job description for better matching analysis"></textarea>
+                <!-- Job Description -->
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-briefcase"></i>
+                        <textarea id="jobDesc" placeholder="Optional: Paste job description for better matching analysis..."></textarea>
+                    </label>
                 </div>
 
-                <button id="btnUpload" class="btn-primary-large">
+                <!-- Analyze Button -->
+                <button id="btnUpload" class="btn-primary">
                     <i class="fas fa-rocket"></i>
                     Analyze Resume
                 </button>
-
-                <div id="loading" class="loading-state">
-                    <div class="spinner"></div>
-                    <span>AI is analyzing your resume...</span>
-                </div>
             </div>
 
-            <div id="result" class="results-section"></div>
+            <!-- Loading -->
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>AI is analyzing your resume...</p>
+            </div>
         </div>
+
+        <!-- Results Section -->
+        <div id="result" class="results-section"></div>
     </main>
 
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
     <script src="script.js"></script>
-    <!-- <script src="../js/analyzer.js"></script> -->
 </body>
 </html>

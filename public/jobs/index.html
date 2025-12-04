@@ -5,194 +5,183 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Tracker - AI Resume Analyzer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="jobs.css">
 </head>
 <body>
-    <!-- Navbar same as analyzer -->
-    <nav class="navbar"><!-- ... same navbar ... --></nav>
-
-    <main class="jobs-container">
-        <!-- Add Job Form - All 12 fields preserved -->
-        <div class="job-form-card">
-            <h2><i class="fas fa-plus-circle"></i> Track New Job</h2>
-            <!-- All your form fields exactly same -->
-            <div class="form-group">
-                <label>Company</label>
-                <input id="jobCompany" placeholder="Company name">
+    <!-- Navbar - SAME AS RESUMES -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-left">
+                <i class="fas fa-briefcase"></i>
+                <h1>Job Tracker</h1>
             </div>
-            <!-- ... all 12 fields ... -->
-            <button id="btnAddJob" class="btn-primary">Add Job</button>
-            <div id="jobsMsg"></div>
+            <div class="nav-right">
+                <a href="/dashboard/" class="nav-link"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="/resumes/" class="nav-link"><i class="fas fa-file-alt"></i> All Resumes</a>
+                <a href="/jobs/" class="nav-link active"><i class="fas fa-briefcase"></i> Track your Job</a>
+                <a href="/analyzer/" class="nav-link"><i class="fas fa-robot"></i> Analyze Resume with Ai </a>
+                <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Loading -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
         </div>
 
-        <!-- Jobs Table - Perfect responsive -->
-        <div class="jobs-table-card">
-            <div class="table-header">
-                <h2><i class="fas fa-list"></i> My Job Applications</h2>
-                <div class="table-controls">
-                    <input id="searchJob" placeholder="🔍 Search jobs...">
-                    <select id="filterStatus">
-                        <option>All Status</option>
-                        <!-- ... options ... -->
-                    </select>
+        <!-- Login Prompt -->
+        <div id="loginPrompt" class="login-prompt hidden">
+            <i class="fas fa-lock"></i>
+            <h3>Please Login to Continue</h3>
+            <p>Login to manage your job applications</p>
+            <a href="/login/" class="btn-primary">Go to Login</a>
+        </div>
+
+        <!-- Main Content -->
+        <div id="mainContent" class="content-wrapper hidden">
+            <!-- Stats Header - SAME STYLE -->
+            <section class="stats-header">
+                <div class="stats-grid">
+                    <div class="stat-card stat-orange">
+                        <div class="stat-icon"><i class="fas fa-play-circle"></i></div>
+                        <div class="stat-content">
+                            <p>Applied</p>
+                            <div class="stat-number" id="appliedCount">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-blue">
+                        <div class="stat-icon"><i class="fas fa-microphone"></i></div>
+                        <div class="stat-content">
+                            <p>Interviewing</p>
+                            <div class="stat-number" id="interviewingCount">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-red">
+                        <div class="stat-icon"><i class="fas fa-times-circle"></i></div>
+                        <div class="stat-content">
+                            <p>Rejected</p>
+                            <div class="stat-number" id="rejectedCount">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-green">
+                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="stat-content">
+                            <p>Offered</p>
+                            <div class="stat-number" id="offeredCount">0</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="table-wrapper">
-                <table id="jobsTable">
-                    <!-- Your exact table structure -->
-                </table>
-            </div>
-            <div id="emptyState">No jobs tracked yet</div>
+            </section>
+
+            <!-- Add Job Form -->
+            <section class="section job-form-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-plus-circle"></i> Add New Job</h2>
+                </div>
+                <form id="jobForm" class="form-grid">
+                    <div class="form-group">
+                        <input type="text" id="company" placeholder="Company Name *" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="position" placeholder="Position *" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" id="appliedDate" required>
+                    </div>
+                    <div class="form-group">
+                        <select id="status" required>
+                            <option value="">Select Status</option>
+                            <option value="Applied">Applied</option>
+                            <option value="Interviewing">Interviewing</option>
+                            <option value="Rejected">Rejected</option>
+                            <option value="Offered">Offered</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <textarea id="jobDescription" placeholder="Job Description (Optional)"></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <textarea id="notes" placeholder="Notes / Interview Details"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Save Job
+                        </button>
+                        <button type="button" id="clearForm" class="btn-secondary">Clear Form</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Jobs Table -->
+            <section class="section jobs-table-section">
+                <div class="table-header">
+                    <h2 class="section-title"><i class="fas fa-list"></i> Your Applications</h2>
+                    <div class="status-filters">
+                        <button class="filter-btn active" data-status="all">All</button>
+                        <button class="filter-btn" data-status="Applied">Applied</button>
+                        <button class="filter-btn" data-status="Interviewing">Interviewing</button>
+                        <button class="filter-btn" data-status="Offered">Offered</button>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table class="jobs-table">
+                        <thead>
+                            <tr>
+                                <th>Company</th>
+                                <th>Position</th>
+                                <th>Status</th>
+                                <th>Date Applied</th>
+                                <th>Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jobsTableBody">
+                            <tr class="empty-state">
+                                <td colspan="6">
+                                    <i class="fas fa-briefcase"></i>
+                                    <p>No jobs yet. Add your first application above!</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
     </main>
 
-    <!-- <script src="scri// public/js/jobs.js
-const btnAddJob = document.getElementById("btnAddJob");
-const jobsTableBody = document.querySelector("#jobsTable tbody");
-const jobsMsg = document.getElementById("jobsMsg");
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Job</h3>
+                <button id="closeModal" class="close-btn">&times;</button>
+            </div>
+            <form id="editForm">
+                <input type="hidden" id="editJobId">
+                <div class="form-group">
+                    <select id="editStatus" required>
+                        <option value="Applied">Applied</option>
+                        <option value="Interviewing">Interviewing</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="Offered">Offered</option>
+                    </select>
+                </div>
+                <div class="form-group full-width">
+                    <textarea id="editNotes" placeholder="Update notes..." rows="4"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">Update Job</button>
+                    <button type="button" id="deleteJobBtn" class="btn-danger">Delete Job</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-function getToken() {
-  return localStorage.getItem("token");
-}
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
 
-async function fetchJobs() {
-  const token = getToken();
-  if (!token) {
-    jobsMsg.innerText = "Please login on index page";
-    return;
-  }
-
-  try {
-    const res = await fetch("/api/jobs", {
-      headers: { Authorization: "Bearer " + token }
-    });
-
-    const data = await res.json();
-    if (!data.success) {
-      jobsMsg.innerText = "Failed to load jobs";
-      return;
-    }
-
-    if (!data.jobs.length) {
-      document.getElementById("emptyState").style.display = "block";
-    } else {
-      document.getElementById("emptyState").style.display = "none";
-    }
-
-    jobsTableBody.innerHTML = data.jobs
-      .map(j => `
-        <tr data-id="${j._id}">
-          <td>${j.company}</td>
-          <td>${j.position}</td>
-          <td>${j.jobPostStatus || "open"}</td>
-          <td>${j.jobType || "-"}</td>
-          <td>${j.appliedDate ? new Date(j.appliedDate).toLocaleDateString() : "-"}</td>
-          <td>
-            <button class="btnEdit">Edit</button>
-            <button class="btnDel">Delete</button>
-          </td>
-        </tr>
-      `)
-      .join("");
-  } catch (err) {
-    console.error(err);
-    jobsMsg.innerText = "Error fetching";
-  }
-}
-
-// Add Job
-btnAddJob.addEventListener("click", async () => {
-  const token = getToken();
-  if (!token) return alert("Please login");
-
-  const payload = {
-    company: document.getElementById("jobCompany").value,
-    position: document.getElementById("jobPosition").value,
-    jobPostStatus: document.getElementById("jobPostStatus").value,
-    status: document.getElementById("jobStatus").value,
-    jobLocation: document.getElementById("jobLocation").value,
-    jobType: document.getElementById("jobType").value,
-    salary: document.getElementById("jobSalary").value,
-    url: document.getElementById("jobUrl").value,
-    jobDescription: document.getElementById("jobDesc").value,
-    appliedDate: document.getElementById("jobDate").value,
-    notes: document.getElementById("jobNotes").value
-  };
-
-  try {
-    const res = await fetch("/api/jobs", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token
-      },
-      body: JSON.stringify(payload)
-    });
-
-    const data = await res.json();
-    if (!data.success) {
-      jobsMsg.innerText = data.message || "Add failed";
-      return;
-    }
-
-    jobsMsg.innerText = "Job added";
-    fetchJobs();
-  } catch (err) {
-    console.error(err);
-    jobsMsg.innerText = "Error adding job";
-  }
-});
-
-// Edit + Delete (Delegation)
-document.addEventListener("click", async (e) => {
-  if (e.target.matches(".btnDel")) {
-    const row = e.target.closest("tr");
-    const id = row.dataset.id;
-
-    if (!confirm("Delete this job?")) return;
-
-    const token = getToken();
-    await fetch("/api/jobs/" + id, {
-      method: "DELETE",
-      headers: { Authorization: "Bearer " + token }
-    });
-
-    fetchJobs();
-  }
-
-  if (e.target.matches(".btnEdit")) {
-    const row = e.target.closest("tr");
-    const id = row.dataset.id;
-
-    const newPostStatus = prompt(
-      "Job Posting Status (open/paused/closed/filled/expired/draft):",
-      row.children[2].innerText
-    );
-
-    const newMyStatus = prompt(
-      "Your Status (Applied/Interviewing/Offered/Rejected):"
-    );
-
-    const token = getToken();
-
-    await fetch("/api/jobs/" + id, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token
-      },
-      body: JSON.stringify({
-        jobPostStatus: newPostStatus,
-        status: newMyStatus
-      })
-    });
-
-    fetchJobs();
-  }
-});
-
-// Load on page start
-fetchJobs();
-pt.js"></script> -->
+    <script src="jobs.js"></script>
 </body>
 </html>

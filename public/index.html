@@ -1,38 +1,58 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <title>Register — Resume Analyzer</title>
-  <link rel="stylesheet" href="style.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register — AI Resume Analyzer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <div class="container">
-    <h2>Resume Analyzer</h2>
+    <div class="register-wrapper">
+        <div class="register-container">
+            <div class="register-card">
+                <div class="logo-section">
+                    <!-- <i class="fas fa-user-plus"></i> -->
+                    <h1>Create Account</h1>
+                    <!-- <p>Join thousands of professionals using AI-powered analysis</p> -->
+                </div>
 
-    <div class="card">
-      <h3>Create Account</h3>
+                <form class="register-form" id="registerForm">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input id="name" type="text" placeholder="Full Name" required>
+                    </div>
 
-      <input id="name" placeholder="Full Name">
-      <input id="email" placeholder="Email">
-      <input id="password" type="password" placeholder="Password">
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input id="email" type="email" placeholder="Email Address" required>
+                    </div>
 
-      <button id="btnRegister">Register</button>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input id="password" type="password" placeholder="Password (6+ characters)" required>
+                    </div>
 
-      <p class="small">
-  Already have an account?
-  <a href="/login/">Login</a>
-</p>
+                    <button type="submit" id="btnRegister" class="btn-primary">
+                        <i class="fas fa-user-plus"></i>
+                        Create Account
+                    </button>
+                </form>
 
+                <div class="divider">
+                    <span>or</span>
+                </div>
 
-      <div id="authStatus" class="small"></div>
+                <p class="login-link">
+                    Already have an account? 
+                    <a href="/login/">Sign In</a>
+                </p>
+
+                <div id="authStatus" class="status-message"></div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- <script src="js/auth.js"></script> -->
-   <script src="../public/js/auth.js"></script>
-   <script src="/public/script.js"></script>
-
-
+    <script src="script.js"></script>
 </body>
 </html>

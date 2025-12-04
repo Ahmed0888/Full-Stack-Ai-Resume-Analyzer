@@ -4,33 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume Details - AI Resume Analyzer</title>
-    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="details.css">
 </head>
 <body>
-    <!-- Header -->
+    <!-- Navbar - SAME AS JOBS/RESUMES -->
     <nav class="navbar">
         <div class="nav-content">
             <div class="nav-left">
-                <i class="fas fa-file-alt text-2xl"></i>
-                <span>Resume Analysis</span>
+                <i class="fas fa-file-alt"></i>
+                <h1>Resume Analysis</h1>
             </div>
             <div class="nav-right">
-                <button id="backBtn" class="btn-secondary">
-                    <i class="fas fa-arrow-left"></i> Back to Resumes
-                </button>
-                <button id="printBtn" class="btn-print">
-                    <i class="fas fa-print"></i> Print
-                </button>
+                <a href="/dashboard/" class="nav-link"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="/resumes/" class="nav-link active"><i class="fas fa-list"></i> All Resumes</a>
+                <a href="/jobs/" class="nav-link"><i class="fas fa-briefcase"></i> Track your Jobs</a>
+                <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
             </div>
         </div>
     </nav>
 
     <main class="container">
         <!-- Loading -->
-        <div id="loading" class="loading-screen">
-            <div class="spinner-large"></div>
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
             <p>Loading analysis...</p>
         </div>
 
@@ -39,53 +36,64 @@
             <!-- Scores Header -->
             <section class="scores-header">
                 <div class="score-display">
-                    <div class="main-score" id="mainScore">75</div>
+                    <div class="main-score" id="mainScore">0</div>
                     <div class="score-label">Overall AI Score</div>
                 </div>
                 <div class="scores-grid">
-                    <div class="score-card">
-                        <div class="score-circle blue" id="aiScore">75</div>
+                    <div class="result-card score-card">
+                        <div class="score-circle blue" id="aiScore">0</div>
                         <div>AI Score</div>
                     </div>
-                    <div class="score-card">
-                        <div class="score-circle green" id="atsScore">72</div>
+                    <div class="result-card score-card">
+                        <div class="score-circle green" id="atsScore">0</div>
                         <div>ATS Score</div>
                     </div>
-                    <div class="score-card">
-                        <div class="score-circle purple" id="matchScore">78%</div>
+                    <div class="result-card score-card">
+                        <div class="score-circle purple" id="matchScore">0%</div>
                         <div>Job Match</div>
                     </div>
                 </div>
             </section>
 
-            <!-- Resume Preview -->
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button id="backBtn" class="btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Resumes
+                </button>
+                <button id="printBtn" class="btn-primary">
+                    <i class="fas fa-print"></i> Print Resume
+                </button>
+            </div>
+
+            <!-- Original Resume -->
             <section class="resume-preview">
-                <h2><i class="fas fa-eye"></i> Original Resume</h2>
+                <h2 class="section-title"><i class="fas fa-eye"></i> Original Resume</h2>
                 <div class="preview-box" id="originalResume"></div>
             </section>
 
             <!-- Improved Resume -->
-            <section class="improved-resume">
-                <h2><i class="fas fa-star"></i> AI Improved Resume</h2>
+            <section class="resume-preview improved-resume">
+                <h2 class="section-title"><i class="fas fa-star"></i> AI Improved Resume</h2>
                 <div class="preview-actions">
-                    <button id="copyImproved" class="btn-copy-large">
+                    <button id="copyImproved" class="btn-primary btn-copy">
                         <i class="fas fa-copy"></i> Copy Improved
                     </button>
-                    <button id="downloadImproved" class="btn-download">
+                    <button id="downloadImproved" class="btn-secondary btn-download">
                         <i class="fas fa-download"></i> Download TXT
                     </button>
                 </div>
-                <div class="preview-box improved" id="improvedResume"></div>
+                <div class="preview-box" id="improvedResume"></div>
             </section>
 
             <!-- Analysis Details -->
             <section class="analysis-details">
+                <h2 class="section-title"><i class="fas fa-chart-bar"></i> Analysis Details</h2>
                 <div class="analysis-grid">
-                    <div>
+                    <div class="analysis-card">
                         <h3><i class="fas fa-bullseye"></i> Job Description</h3>
                         <div class="detail-box" id="jobDescription"></div>
                     </div>
-                    <div>
+                    <div class="analysis-card">
                         <h3><i class="fas fa-exclamation-triangle"></i> Missing Skills</h3>
                         <div class="detail-box skills-list" id="missingSkills"></div>
                     </div>
@@ -94,19 +102,22 @@
 
             <!-- Suggestions -->
             <section class="suggestions">
-                <h2><i class="fas fa-lightbulb"></i> AI Suggestions</h2>
+                <h2 class="section-title"><i class="fas fa-lightbulb"></i> AI Suggestions</h2>
                 <div class="suggestions-list" id="suggestionsList"></div>
             </section>
 
-            <!-- File -->
+            <!-- File Download -->
             <section class="file-section" id="fileSection" style="display: none;">
-                <h2><i class="fas fa-file-pdf"></i> Original File</h2>
-                <a id="fileLink" class="file-download" target="_blank">
+                <h2 class="section-title"><i class="fas fa-file-pdf"></i> Original File</h2>
+                <a id="fileLink" class="file-download btn-primary">
                     <i class="fas fa-download"></i> Download PDF
                 </a>
             </section>
         </div>
     </main>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
 
     <script src="details.js"></script>
 </body>
