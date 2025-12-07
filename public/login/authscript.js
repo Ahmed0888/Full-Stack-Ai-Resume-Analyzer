@@ -58,7 +58,7 @@ async function loginUser() {
   if (!validation.valid) return showMessage(validation.message, true);
 
   try {
-    const data = await apiRequest("auth/login", "POST", {
+    const data = await apiRequest("auth/login/", "POST", {
       email: emailInput.value,
       password: passwordInput.value,
     });
