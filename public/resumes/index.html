@@ -1,58 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>My Resumes - AI Resume Analyzer</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-    <nav class="navbar">
-        <div class="nav-content">
-            <div class="nav-left">
-                <i class="fas fa-file-alt"></i>
-                <h1>My Resumes</h1>
-            </div>
-            <div class="nav-right">
-                <a href="/resumes/" class="nav-link"><i class="fas fa-file-alt"></i> Resumes</a>
-                <a href="/jobs/" class="nav-link"><i class="fas fa-briefcase"></i> Jobs</a>
-                <a href="/dashboard/" class="nav-link"><i class="fas fa-chart-line"></i> Dashboard</a>
-                <a href="/analyzer/" class="nav-link"><i class="fas fa-rocket"></i> Analyze</a>
-                <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
-            </div>
-        </div>
-    </nav>
-
-    <main class="container">
-        <section class="stats-grid" id="statsGrid"></section>
-
-        <section class="resumes-section">
-            <div class="section-header">
-                <h2><i class="fas fa-list"></i> All Resumes</h2>
-                <a href="/analyzer" class="btn-primary"><i class="fas fa-plus"></i> New Analysis</a>
-            </div>
-
-            <div class="loading" id="loading">
-                <div class="spinner"></div>
-            </div>
-
-            <div class="resumes-grid" id="resumesList"></div>
-
-            <div class="no-resumes hidden" id="noResumes">
-                <i class="fas fa-file-alt"></i>
-                <h3>No resumes analyzed yet</h3>
-                <p>Upload your first resume to get AI-powered analysis</p>
-                <a href="/upload.html" class="btn-primary">Analyze Resume Now</a>
-            </div>
-        </section>
-    </main>
-
-    <script src="script.js"></script>
-    <script>protectPage() </script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,7 +52,7 @@
                     </select>
                 </div>
             </div>
-            <a href="/analyzer" class="btn-primary">
+            <a href="/analyzer/" class="btn-primary">
                 <i class="fas fa-plus"></i> New Analysis
             </a>
         </section>
@@ -132,7 +77,7 @@
             <i class="fas fa-file-alt"></i>
             <h3>No resumes found</h3>
             <p>Try adjusting your search or filters above</p>
-            <a href="/analyzer" class="btn-primary">Start New Analysis</a>
+            <a href="/analyzer/" class="btn-primary">Start New Analysis</a>
         </div>
 
         <!-- No Resumes Ever -->
@@ -140,7 +85,7 @@
             <i class="fas fa-file-alt"></i>
             <h3>No resumes analyzed yet</h3>
             <p>Upload your first resume to get AI-powered analysis</p>
-            <a href="/analyzer" class="btn-primary">Analyze Resume Now</a>
+            <a href="/analyzer/" class="btn-primary">Analyze Resume Now</a>
         </div>
     </main>
 

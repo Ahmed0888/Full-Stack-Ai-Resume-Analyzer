@@ -1,4 +1,3 @@
-// ✅ COMPLETE FIXED analyzer/script.js - READY TO PASTE & VERCEL PERFECT
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Analyzer page loaded');
     
@@ -65,11 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 console.log('📡 Uploading to:', `${API_BASE}/resume/analyze`);
-                const res = await fetch(`${API_BASE}/resume/analyze`, {  // ✅ FIXED: Full backend URL
+                const res = await fetch(`${API_BASE}/resume/analyze`, {  //  FIXED: Full backend URL
                     method: "POST",
                     headers: { 
                         'Authorization': `Bearer ${token}`
-                        // ✅ NO Content-Type for FormData - browser sets it automatically
+                        //  NO Content-Type for FormData - browser sets it automatically
                     },
                     body: fd
                 });
@@ -205,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             await navigator.clipboard.writeText(ai.improvedText);
                             btnCopy.innerHTML = '<i class="fas fa-check"></i> Copied!';
                             btnCopy.classList.add('copied');
-                            showToast('✅ Improved resume copied!', 'success');
+                            showToast(' Improved resume copied!', 'success');
                             setTimeout(() => {
                                 btnCopy.innerHTML = '<i class="fas fa-copy"></i> Copy Text';
                                 btnCopy.classList.remove('copied');
@@ -219,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Reset form
                 btnUpload.disabled = false;
                 btnUpload.innerHTML = '<i class="fas fa-rocket"></i> Analyze Another';
-                showToast('✅ Analysis complete!', 'success');
+                showToast(' Analysis complete!', 'success');
 
             } catch (err) {
                 console.error('❌ Analyzer error:', err);
@@ -269,8 +268,8 @@ function protectPage() {
         window.location.href = "/login/";
         return false;
     }
-    console.log('✅ Analyzer page protected');
+    console.log(' Analyzer page protected');
     return true;
 }
 
-console.log('✅ Analyzer script fully loaded & protected');
+console.log(' Analyzer script fully loaded & protected');
